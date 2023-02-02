@@ -10,48 +10,37 @@ from PIL import Image
 class mainPage(customtkinter.CTk):
     def __init__(self):
         super().__init__()
-
         self.geometry("1110x650")
 
 # ------------------------- Main Page title -------------------------
-
         self.odio_tek = customtkinter.CTkLabel(self,text="Odio-Tek",font=("Helvetica",25,"bold"))
         self.odio_tek.pack(pady=20)
 
 # ------------------------- Treeview -------------------------
-
         style = ttk.Style()
-        #Pick a theme
         style.theme_use("default")
 
-        #Configure treview colors
         style.configure("Treeview",
                 background="white",
                 foreground="black",
                 rowheight=25,
                 fieldbackground="white")
 
-        #Change selected color
         style.map("Treeview",background=[('selected', "#347083")])
 
-        tree_frame = Frame(self)
+        tree_frame = customtkinter.CTkFrame(self)
         tree_frame.pack(padx=10,pady=(0,10),fill=BOTH)
 
-        #Create a treeview scrollbar
         tree_scroll = customtkinter.CTkScrollbar(tree_frame)
         tree_scroll.pack(side=RIGHT,fill=Y)
 
-        #Create the treeview
         self.my_tree = ttk.Treeview(tree_frame,yscrollcommand=tree_scroll.set,selectmode="extended")
         self.my_tree.pack(side="top",fill=BOTH,expand=True)
 
-        #Configure the scrollbar
         tree_scroll.configure(command=self.my_tree.yview)
 
-        #Define our columns
         self.my_tree["columns"] = ("ID", "First Name", "Last Name", "Birthday", "Phone", "Mail", "Job", "Record Date")
 
-        #Format our columns
         self.my_tree.column("#0",width=0,stretch=NO)
         self.my_tree.column("ID",anchor="center",width=100)
         self.my_tree.column("First Name",anchor="center",width=140)
@@ -62,7 +51,6 @@ class mainPage(customtkinter.CTk):
         self.my_tree.column("Job",anchor="center",width=140)
         self.my_tree.column("Record Date",anchor="center",width=140)
 
-        #Create Headings
         self.my_tree.heading("#0",text="",anchor="w")
         self.my_tree.heading("ID",text="ID",anchor="center")
         self.my_tree.heading("First Name",text="İsim",anchor="center")
@@ -76,11 +64,10 @@ class mainPage(customtkinter.CTk):
         # Call function when row clicked
         self.my_tree.bind('<ButtonRelease-1>', self.get_treeview_data)
 
-        # Get the data for treeview -- Function implemented at 492
+        # Get the data for treeview
         self.update_treeview()
 
 # ------------------------- Customer Information Frame -------------------------
-
         self.info_frame = customtkinter.CTkFrame(self,border_width=1,border_color="black",corner_radius=10)
         self.info_frame.pack(padx=10,pady=(10,20),side=LEFT,fill="both")
 
@@ -88,7 +75,6 @@ class mainPage(customtkinter.CTk):
         self.info_label.pack(padx=20,pady=10)
 
 # ------------------------- ID / NAME / SURNAME -------------------------
-
         self.customer_info_frame = customtkinter.CTkFrame(self.info_frame,border_width=1,border_color="black")
         self.customer_info_frame.pack(padx=10,fill=BOTH)
 
@@ -149,7 +135,6 @@ class mainPage(customtkinter.CTk):
         self.hearing_aid_tube2_entry.pack(side=LEFT,padx=(0,10),pady=4)
 
 # ------------------------- Update / Detail / Add-------------------------
-
         self.update_button = customtkinter.CTkButton(self.info_frame, text="Güncelle",command=self.update_patient)
         self.update_button.pack(side=LEFT,padx=10,expand=True)
 
@@ -159,12 +144,9 @@ class mainPage(customtkinter.CTk):
         self.main_add_button = customtkinter.CTkButton(self.info_frame, text="Yeni Hasta Ekle", command=self.customerForm)
         self.main_add_button.pack(side=LEFT,padx=10,expand=True)
 
-
 # ------------------------- Search1 -------------------------
-
         self.search_frame = customtkinter.CTkFrame(self,border_width=1,border_color="black",corner_radius=10)
         self.search_frame.pack(padx=10,pady=(10,20),side=LEFT,fill="both",expand=True)
-
 
         self.total_patient_label = customtkinter.CTkLabel(self.search_frame,text="Toplam Hasta Sayısı",font=("Helvetica",17,"bold","underline"))
         self.total_patient_label.pack(padx=20,pady=(10,2))
@@ -187,7 +169,6 @@ class mainPage(customtkinter.CTk):
         self.main_frame.pack(padx=10,pady=20)
 
 # ------------------------- Heading -------------------------
-
         self.top_frame = customtkinter.CTkFrame(self.main_frame,border_width=1,border_color="black",corner_radius=10)
         self.top_frame.pack(padx=1,pady=(1,0),fill="both")
 
@@ -195,53 +176,43 @@ class mainPage(customtkinter.CTk):
         self.heading.pack(padx=5,pady=10)
 
 # ------------------------- Name / Surname -------------------------
-
         self.name_frame = customtkinter.CTkFrame(self.main_frame,border_width=1,border_color="black")
         self.name_frame.pack(padx=1,fill="both")
 
         self.name_label = customtkinter.CTkLabel(self.name_frame,text="Ad:",font=("Helvetica",13))
         self.name_label.pack(padx=(10,5),pady=5,side="left")
-
         self.name_entry = customtkinter.CTkEntry(self.name_frame,placeholder_text="Ad")
         self.name_entry.pack(padx=(5,5),pady=5,side="left",fill="both",expand=True)
 
         self.surname_label = customtkinter.CTkLabel(self.name_frame,text="Soyad:",font=("Helvetica",13))
         self.surname_label.pack(padx=(5,5),pady=5,side="left")
-
         self.surname_entry = customtkinter.CTkEntry(self.name_frame,placeholder_text="Soyad")
         self.surname_entry.pack(padx=(5,10),pady=5,side="left",fill="both",expand=True)
 
 # ------------------------- Birthday / Job -------------------------
-
         self.birthday_frame = customtkinter.CTkFrame(self.main_frame,border_width=1,border_color="black")
         self.birthday_frame.pack(padx=1,fill="both")
 
         self.birthday_label = customtkinter.CTkLabel(self.birthday_frame,text="Doğum Tarihi:",font=("Helvetica",13))
         self.birthday_label.pack(padx=(10,5),pady=5,side="left")
-
         self.birthday_entry = customtkinter.CTkEntry(self.birthday_frame,placeholder_text="DD/MM/YYYY")
         self.birthday_entry.pack(padx=(5,5),pady=5,side="left",fill="both",expand=True)
 
-
         self.job_label = customtkinter.CTkLabel(self.birthday_frame,text="Meslek:",font=("Helvetica",13))
         self.job_label.pack(padx=(5,5),pady=5,side="left")
-
         self.job_entry = customtkinter.CTkEntry(self.birthday_frame,placeholder_text="Meslek")
         self.job_entry.pack(padx=(5,10),pady=5,side="left",fill="both",expand=True)
 
 # ------------------------- Complaint -------------------------
-
         self.complaint_frame = customtkinter.CTkFrame(self.main_frame,border_width=1,border_color="black")
         self.complaint_frame.pack(padx=1,fill="both")
 
         self.complaint_label = customtkinter.CTkLabel(self.complaint_frame,text="Şikayet:",font=("Helvetica",13))
         self.complaint_label.pack(padx=(10,5),pady=5,side="left")
-
         self.complaint_entry = customtkinter.CTkEntry(self.complaint_frame,placeholder_text="Şikayet...")
         self.complaint_entry.pack(padx=(5,10),pady=5,side="left",fill="both",expand=True)
 
 # ------------------------- Sex / Email -------------------------
-
         self.sex_frame = customtkinter.CTkFrame(self.main_frame,border_width=1,border_color="black")
         self.sex_frame.pack(padx=1,fill="both")
 
@@ -257,51 +228,42 @@ class mainPage(customtkinter.CTk):
 
         self.mail_label = customtkinter.CTkLabel(self.sex_frame,text="E-mail:",font=("Helvetica",13))
         self.mail_label.pack(padx=(5,5),pady=5,side="left")
-
         self.mail_entry = customtkinter.CTkEntry(self.sex_frame,placeholder_text="Mail") 
         self.mail_entry.pack(padx=(5,10),pady=5,side="left",fill="both",expand=True)
 
 # ------------------------- Address -------------------------
-
         self.address_frame = customtkinter.CTkFrame(self.main_frame,border_width=1,border_color="black")
         self.address_frame.pack(padx=1,fill="both")
 
         self.address_label = customtkinter.CTkLabel(self.address_frame,text="Adres:",font=("Helvetica",13))
         self.address_label.pack(padx=(10,5),pady=5,side="left")
-
         self.address_entry = customtkinter.CTkEntry(self.address_frame,placeholder_text="Adres")
         self.address_entry.pack(padx=(5,10),pady=5,side="left",fill="both",expand=True)
 
 # ------------------------- Phone / Patient Relation -------------------------
-
         self.phone_frame = customtkinter.CTkFrame(self.main_frame,border_width=1,border_color="black")
         self.phone_frame.pack(padx=1,fill="both")
 
         self.phone_label = customtkinter.CTkLabel(self.phone_frame,text="Telefon No:",font=("Helvetica",13))
         self.phone_label.pack(padx=(10,5),pady=5,side="left")
-
         self.phone_entry = customtkinter.CTkEntry(self.phone_frame,placeholder_text="(xxx) xxx xx xx")
         self.phone_entry.pack(padx=(5,5),pady=5,side="left",fill="both",expand=True)
 
         self.patient_label = customtkinter.CTkLabel(self.phone_frame,text="Hasta Yakınlık Derecesi:",font=("Helvetica",13))
         self.patient_label.pack(padx=(5,5),pady=5,side="left")
-
         self.patient_entry = customtkinter.CTkEntry(self.phone_frame,placeholder_text="Yakınlık")
         self.patient_entry.pack(padx=(5,10),pady=5,side="left",fill="both",expand=True)
 
 # ------------------------- Emergency Contact -------------------------
-
         self.emergency_frame = customtkinter.CTkFrame(self.main_frame,border_width=1,border_color="black")
         self.emergency_frame.pack(padx=1,fill="both")
 
         self.emergency_label = customtkinter.CTkLabel(self.emergency_frame,text="Acil durum tel:",font=("Helvetica",13))
         self.emergency_label.pack(padx=(10,5),pady=5,side="left")
-
         self.emergency_entry = customtkinter.CTkEntry(self.emergency_frame,placeholder_text="(xxx) xxx xx xx")
         self.emergency_entry.pack(padx=(5,10),pady=5,side="left",fill="both",expand=True)
 
 # ------------------------- Recomandation -------------------------
-
         self.recomandation_frame = customtkinter.CTkFrame(self.main_frame,border_width=1,border_color="black")
         self.recomandation_frame.pack(padx=1,fill="both")
 
@@ -319,12 +281,10 @@ class mainPage(customtkinter.CTk):
 
         self.dr_checkbox = customtkinter.CTkCheckBox(self.recomandation_frame,text="Dr.",checkbox_width=13,checkbox_height=13,width=30)
         self.dr_checkbox.pack(padx=(30,5),pady=5,side="left")
-
         self.dr_entry = customtkinter.CTkEntry(self.recomandation_frame)
         self.dr_entry.pack(padx=(5,10),pady=5,side="left",fill="both",expand=True)
 
 # -------------------------Hearing Aid Heading -------------------------
-
         self.aid_heading_frame = customtkinter.CTkFrame(self.main_frame,border_width=1,border_color="black",corner_radius=10)
         self.aid_heading_frame.pack(padx=1,fill="both")
 
@@ -338,19 +298,16 @@ class mainPage(customtkinter.CTk):
 
         self.brand_label = customtkinter.CTkLabel(self.brand_frame,text="Marka/Model:",font=("Helvetica",13))
         self.brand_label.pack(padx=(10,5),pady=5,side="left")
-
         self.brand_entry = customtkinter.CTkEntry(self.brand_frame)
         self.brand_entry.pack(padx=(5,5),pady=5,side="left",fill="both",expand=True)
 
         self.ID_label = customtkinter.CTkLabel(self.brand_frame,text="ID:",font=("Helvetica",13))
         self.ID_label.pack(padx=(5,5),pady=5,side="left")
-
         self.ID_entry = customtkinter.CTkEntry(self.brand_frame)
         self.ID_entry.pack(padx=(5,5),pady=5,side="left",fill="both",expand=True)
 
         self.tube_label = customtkinter.CTkLabel(self.brand_frame,text="Tüp/Kalıp:",font=("Helvetica",13))
         self.tube_label.pack(padx=(10,5),pady=5,side="left")
-
         self.tube_entry = customtkinter.CTkEntry(self.brand_frame)
         self.tube_entry.pack(padx=(5,10),pady=5,side="left",fill="both",expand=True)
 
@@ -360,19 +317,16 @@ class mainPage(customtkinter.CTk):
 
         self.brand_label2 = customtkinter.CTkLabel(self.brand_frame2,text="Marka/Model:",font=("Helvetica",13))
         self.brand_label2.pack(padx=(10,5),pady=5,side="left")
-
         self.brand_entry2 = customtkinter.CTkEntry(self.brand_frame2)
         self.brand_entry2.pack(padx=(5,5),pady=5,side="left",fill="both",expand=True)
 
         self.ID_label2 = customtkinter.CTkLabel(self.brand_frame2,text="ID:",font=("Helvetica",13))
         self.ID_label2.pack(padx=(5,5),pady=5,side="left")
-
         self.ID_entry2 = customtkinter.CTkEntry(self.brand_frame2)
         self.ID_entry2.pack(padx=(5,5),pady=5,side="left",fill="both",expand=True)
 
         self.tube_label2 = customtkinter.CTkLabel(self.brand_frame2,text="Tüp/Kalıp:",font=("Helvetica",13))
         self.tube_label2.pack(padx=(10,5),pady=5,side="left")
-
         self.tube_entry2 = customtkinter.CTkEntry(self.brand_frame2)
         self.tube_entry2.pack(padx=(5,10),pady=5,side="left",fill="both",expand=True)
 
@@ -400,7 +354,6 @@ class mainPage(customtkinter.CTk):
 
         self.question1_label2 = customtkinter.CTkLabel(self.question1_frame,text="Evet ise, ne zaman ve nerede?",font=("Helvetica",13))
         self.question1_label2.pack(padx=(5,5),pady=5,side="left")
-
         self.question1_entry = customtkinter.CTkEntry(self.question1_frame)
         self.question1_entry.pack(padx=(5,10),pady=5,side="left",fill="both",expand=True)
 
@@ -501,8 +454,11 @@ class mainPage(customtkinter.CTk):
         self.add_button = customtkinter.CTkButton(self.main_frame,text="Müşteri Ekle",command=self.add_customer)
         self.add_button.pack(side="left",expand=True)
 
-# ------------------------- Functions -------------------------
 
+# ------------------------- FUNCTIONS -------------------------
+
+
+# ------------------------- UPDATE TREEVIEW -------------------------
     # Updates the treeview every time program runs or a new customer added
     def update_treeview(self):
         self.my_tree.tag_configure("oddrow",background='white')
@@ -524,6 +480,8 @@ class mainPage(customtkinter.CTk):
                         self.my_tree.insert(parent='', index='end', values=(record[0],record[1],record[2],record[3],record[4],record[5],record[6],record[13]), tags='oddrow')
                 count += 1
 
+
+# ------------------------- ADD CUSTOMER-------------------------
     def add_customer(self):
         # get user inputs
         #Patient Information
@@ -575,10 +533,6 @@ class mainPage(customtkinter.CTk):
         c.executemany(f"INSERT INTO customers(name,surname,birthday,phone,mail,job,right_model,right_id,right_tube,left_model,left_id,left_tube,record_date) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",[data])
         # Commit Changes
         conn.commit()
-
-        #get the last committed data
-        #c.execute("select * from customers")
-        #records = c.fetchall()
         #Close connection
         conn.close()
 
@@ -596,6 +550,7 @@ class mainPage(customtkinter.CTk):
         im.save(f"Formlar/{name+surname}.png")
 
 
+# ------------------------- GET TREEVIEW DATA -------------------------
     def get_treeview_data(self,e):
         self.selected_patient = self.my_tree.focus() #gets the selected column ID
 
@@ -631,8 +586,9 @@ class mainPage(customtkinter.CTk):
         self.hearing_aid_id2_entry.insert(0,self.data[11])
         self.hearing_aid_tube2_entry.insert(0,self.data[12])
 
-    def update_patient(self):
 
+# ------------------------- UPDATE PATIENT -------------------------
+    def update_patient(self):
         self.selected_patient = self.my_tree.focus()
         self.values = self.my_tree.item(self.selected_patient,"values")
 
@@ -657,6 +613,7 @@ class mainPage(customtkinter.CTk):
         self.update_treeview()
 
 
+# ------------------------- CLEAR TABLE -------------------------
     def clear_table(self):
         conn = sqlite3.connect("customers.db")
         c = conn.cursor()
@@ -664,12 +621,16 @@ class mainPage(customtkinter.CTk):
         conn.commit()
         conn.close()
 
+
+# ------------------------- GET FORM -------------------------
     def get_form(self):
         self.selected_patient = self.my_tree.focus()
         self.values = self.my_tree.item(self.selected_patient,"values")
         im = Image.open(f"Formlar/{self.values[1]+self.values[2]}.png")
         im.show()
 
+
+# ------------------------- GET TOTAL PATIENT -------------------------
     def get_total_patient(self):
         conn = sqlite3.connect("customers.db")
         c = conn.cursor()
@@ -678,6 +639,8 @@ class mainPage(customtkinter.CTk):
         conn.commit()
         conn.close()
 
+
+# ------------------------- NAME SEARCH -------------------------
     def name_search(self):
         self.search_page = customtkinter.CTkToplevel(self)
         self.search_page.title("Odio-Tek")
@@ -707,6 +670,8 @@ class mainPage(customtkinter.CTk):
         self.patient_id_label = customtkinter.CTkLabel(self.main_frame,text=" ")
         self.patient_id_label.pack(padx=10,pady=10)
 
+
+# ------------------------- FIND BY NAME -------------------------
     def find_by_name(self):
         name = self.search_name_entry.get().capitalize().strip()
         surname = self.search_surname_entry.get().capitalize().strip()
@@ -725,6 +690,7 @@ class mainPage(customtkinter.CTk):
         self.patient_id_label.configure(text=patient_id,font=("Helvetica",15,"bold"))
 
 
+# ------------------------- DATE SEARCH -------------------------
     def date_search(self):
         self.date_search_page = customtkinter.CTkToplevel(self)
         self.date_search_page.title("Odio-Tek")
@@ -766,6 +732,8 @@ class mainPage(customtkinter.CTk):
         self.year_result_label = customtkinter.CTkLabel(self.year_frame,text="",font=("Helvetica",13))
         self.year_result_label.pack(side=LEFT,padx=10,pady=10)
 
+
+# ------------------------- FIND BY MONTH -------------------------
     def find_by_month(self):
         month = self.month_combobox.get()
 
@@ -781,6 +749,8 @@ class mainPage(customtkinter.CTk):
         result = f"{month_names[int(month)-1]} ayı hasta sayisi:  {len(selected_patient)}" 
         self.month_result_label.configure(text=result,font=("Helvetica",15,"bold"))
 
+
+# ------------------------- FIND BY YEAR -------------------------
     def find_by_year(self):
         year = self.year_combobox.get()
         conn = sqlite3.connect("customers.db")
@@ -792,11 +762,3 @@ class mainPage(customtkinter.CTk):
         conn.close()
         result = f"{year} yılı hasta sayisi:  {len(selected_patient)}"
         self.year_result_label.configure(text=result,font=("Helvetica",15,"bold"))
-
-
-
-
-if __name__ == "__main__":
-    window = mainPage()
-    window.mainloop()
-
