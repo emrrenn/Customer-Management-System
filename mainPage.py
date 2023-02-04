@@ -19,7 +19,7 @@ class mainPage(customtkinter.CTk):
 
 # ------------------------- Treeview -------------------------
         style = ttk.Style()
-        style.theme_use("")
+        style.theme_use("default")
 
         style.configure("Treeview",
                 background="white",

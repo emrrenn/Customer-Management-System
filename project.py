@@ -42,12 +42,15 @@ def check_username_password(username,password):
 
     if not(check_password):
         print(f"Parola hatalı, tekrar deneyiniz.")
+        return False
     elif not(check_username):
         print(f"Kullanıcı Adı hatalı, tekrar deneyiniz.")
+        return False
     else:
         print("Hoşgeldiniz.")
         window = mainPage()
         window.mainloop()
+        return True
 
 
 
