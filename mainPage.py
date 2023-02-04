@@ -10,15 +10,16 @@ from PIL import Image
 class mainPage(customtkinter.CTk):
     def __init__(self):
         super().__init__()
-        self.geometry("1110x650")
+        self.geometry("1150x600")
+        self.title("Odio-tek")
 
 # ------------------------- Main Page title -------------------------
-        self.odio_tek = customtkinter.CTkLabel(self,text="Odio-Tek",font=("Helvetica",25,"bold"))
-        self.odio_tek.pack(pady=20)
+        # self.odio_tek = customtkinter.CTkLabel(self,text="Odio-Tek",font=("Helvetica",25,"bold"))
+        # self.odio_tek.pack(pady=20)
 
 # ------------------------- Treeview -------------------------
         style = ttk.Style()
-        style.theme_use("default")
+        style.theme_use("")
 
         style.configure("Treeview",
                 background="white",
@@ -29,7 +30,7 @@ class mainPage(customtkinter.CTk):
         style.map("Treeview",background=[('selected', "#347083")])
 
         tree_frame = customtkinter.CTkFrame(self)
-        tree_frame.pack(padx=10,pady=(0,10),fill=BOTH)
+        tree_frame.pack(padx=10,pady=(20,10),fill=BOTH)
 
         tree_scroll = customtkinter.CTkScrollbar(tree_frame)
         tree_scroll.pack(side=RIGHT,fill=Y)
@@ -461,8 +462,8 @@ class mainPage(customtkinter.CTk):
 # ------------------------- UPDATE TREEVIEW -------------------------
     # Updates the treeview every time program runs or a new customer added
     def update_treeview(self):
-        self.my_tree.tag_configure("oddrow",background='white')
-        self.my_tree.tag_configure("evenrow",background='lightblue')
+        self.my_tree.tag_configure("oddrow",background='black')
+        self.my_tree.tag_configure("evenrow",background='gray')
 
         # Add data to the treeview
         conn = sqlite3.connect("customers.db")
