@@ -1,0 +1,7 @@
+tkinter
+customtkinter
+PIL
+re
+datetime
+sqlite3
+pyscreenshot
