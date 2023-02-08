@@ -13,7 +13,7 @@ def sign_in():
     sign_in_page.geometry("400x450")
     sign_in_page.title("Odio-tek")
     
-    logo = customtkinter.CTkImage(dark_image=Image.open("pictures/logo.png"),size=(350,200))
+    logo = customtkinter.CTkImage(light_image=Image.open("pictures/logo.png"),size=(350,200))
     logo_label = customtkinter.CTkLabel(sign_in_page,image=logo,text="")
     logo_label.pack(pady=15)
 

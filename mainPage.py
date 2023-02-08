@@ -18,16 +18,9 @@ class mainPage(customtkinter.CTk):
         # self.odio_tek.pack(pady=20)
 
 # ------------------------- Treeview -------------------------
-        style = ttk.Style()
-        style.theme_use("default")
+        self.style = ttk.Style()
 
-        style.configure("Treeview",
-                background="white",
-                foreground="black",
-                rowheight=25,
-                fieldbackground="white")
-
-        style.map("Treeview",background=[('selected', "#347083")])
+        self.style.map("Treeview",background=[('selected', "#347083")])
 
         tree_frame = customtkinter.CTkFrame(self)
         tree_frame.pack(padx=10,pady=(20,10),fill=BOTH)
@@ -462,8 +455,8 @@ class mainPage(customtkinter.CTk):
 # ------------------------- UPDATE TREEVIEW -------------------------
     # Updates the treeview every time program runs or a new customer added
     def update_treeview(self):
-        self.my_tree.tag_configure("oddrow",background='black')
-        self.my_tree.tag_configure("evenrow",background='gray')
+        self.my_tree.tag_configure("oddrow",background='gray')
+        self.my_tree.tag_configure("evenrow",background='black')
 
         # Add data to the treeview
         conn = sqlite3.connect("customers.db")
