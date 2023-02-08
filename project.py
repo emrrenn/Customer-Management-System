@@ -3,6 +3,7 @@ import customtkinter
 from PIL import Image
 from mainPage import mainPage
 import re
+import sqlite3
 
 def main():
     sign_in()
@@ -52,6 +53,31 @@ def check_username_password(username,password):
         window.mainloop()
         return True
 
+def check_database(database_name):
+    conn = sqlite3.connect(database_name)
+    cur = conn.cursor()
+    #check if the connection to databse is achieved
+    result = cur.execute("SELECT name FROM sqlite_master")
+    try:
+        result = result.fetchone()[0]
+        if result == "customers":
+            print("Database connected successfully.")
+            conn.close()
+            return True
+    except TypeError:
+        print("Connection failed")
+        conn.close()
+        return False
+
+def check_database_elements():
+    conn = sqlite3.connect("customers.db")
+    c = conn.cursor()
+    c.execute("SELECT COUNT(*) FROM customers")
+    global total
+    total = c.fetchone()[0]
+    conn.commit()
+    conn.close()
+    return total
 
 
 
