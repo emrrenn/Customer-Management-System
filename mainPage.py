@@ -155,7 +155,7 @@ class mainPage(customtkinter.CTk):
         self.search1_button = customtkinter.CTkButton(self.search_frame, text="Kayıt Tarihi",command=self.date_search)
         self.search1_button.pack(padx=10,pady=20)
 
-
+    
     def customerForm(self):
         self.form = customtkinter.CTkToplevel(self)
         self.form.title("Anamnez Formu")
