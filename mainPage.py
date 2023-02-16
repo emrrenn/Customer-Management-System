@@ -19,6 +19,13 @@ class mainPage(customtkinter.CTk):
 
 # ------------------------- Treeview -------------------------
         self.style = ttk.Style()
+        self.style.theme_use('default')
+
+        self.style.configure("Treeview",
+                             background="#D3D3D3",
+                             foreground="black",
+                             rowheight=25,
+                             fieldbackgorund="#D3D3D3")
 
         self.style.map("Treeview",background=[('selected', "#347083")])
 
@@ -455,8 +462,8 @@ class mainPage(customtkinter.CTk):
 # ------------------------- UPDATE TREEVIEW -------------------------
     # Updates the treeview every time program runs or a new customer added
     def update_treeview(self):
-        self.my_tree.tag_configure("oddrow",background='gray')
-        self.my_tree.tag_configure("evenrow",background='black')
+        self.my_tree.tag_configure("oddrow",background='lightblue')
+        self.my_tree.tag_configure("evenrow",background='white')
 
         # Add data to the treeview
         conn = sqlite3.connect("customers.db")
