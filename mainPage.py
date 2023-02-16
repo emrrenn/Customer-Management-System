@@ -618,7 +618,7 @@ class mainPage(customtkinter.CTk):
     def clear_table(self):
         conn = sqlite3.connect("customers.db")
         c = conn.cursor()
-        c.execute("drop table customers")
+        c.execute("DELETE FROM customers")
         conn.commit()
         conn.close()
 
